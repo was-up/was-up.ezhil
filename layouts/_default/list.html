@@ -8,13 +8,13 @@
 		<div class="recent-posts section">
 			<h2 class="section-header">
         {{ if isset .Data "Term" }}
-        Entries tagged - {{ .Data.Term }}
+          Entries tagged - {{ .Data.Term }} 
         {{ else }}
-				Recent {{ .Type }}
+	  			Recent {{ .Type }}
         {{ end }}
 			</h2>
 			<div class="posts">
-				{{ $pages := where .Site.RegularPages "Type" "eq" .Type }}
+				{{ $pages := union (where .Site.RegularPages "Type" "eq" .Type) (.Data.Pages) }}
 				{{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
 				{{ range $paginator.Pages }}
 				<div class="post">
@@ -22,11 +22,11 @@
 					<a class="title" href="{{ .RelPermalink }}">{{.Title}}</a> &mdash;
 					<span class="description">
 						{{ if isset .Params "description" }}
-						{{ .Description }}
-						{{ else if gt (len .RawContent) 120 }}
-						{{ slicestr .RawContent 0 120 }}...
+  						{{ .Description }}
+						{{ else if gt (len .RawContent) 240 }}
+	  					{{ slicestr .RawContent 0 240 }}...
 						{{ else }}
-						{{ .RawContent }}
+		  				{{ .RawContent }}
 						{{ end }}
 					</span>
 				</div>
