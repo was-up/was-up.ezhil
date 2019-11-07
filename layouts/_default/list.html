@@ -6,7 +6,7 @@
 		{{ partial "head.html" . }}
 
 		<div class="recent-posts section">
-			<h2 class="section-header">
+			<h2>
         {{ if isset .Data "Term" }}
           Entries tagged - {{ .Data.Term }} 
         {{ else }}
